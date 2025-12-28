@@ -1,12 +1,17 @@
-@import url('https://fonts.googleapis.com/css2?family=Spartan:wght@100;200;300;400;500;600;700&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=League+Spartan:wght@100;200;300;400;500;600;700;800&display=swap');
 
-/* --- Global Variables & Reset --- */
+/* --- 1. Variables & Global Reset --- */
 :root {
-    --primary-color: #088178;
-    --text-color: #1a1a1a;
-    --bg-color: #e3e6f3;
-    --white: #fff;
-    --shadow: 20px 20px 30px rgba(0, 0, 0, 0.02);
+    --primary: #088178;
+    --primary-dark: #06605a;
+    --text-main: #1a1a1a;
+    --text-muted: #465b52;
+    --bg-light: #e3e6f3;
+    --white: #ffffff;
+    --gradient: linear-gradient(90deg, #088178 0%, #0c9b91 100%);
+    --shadow-sm: 0 5px 15px rgba(0, 0, 0, 0.05);
+    --shadow-md: 0 10px 20px rgba(0, 0, 0, 0.08);
+    --shadow-hover: 0 20px 30px rgba(0, 0, 0, 0.1);
     --border: 1px solid #cce7d0;
 }
 
@@ -14,32 +19,80 @@
     margin: 0;
     padding: 0;
     box-sizing: border-box;
-    font-family: 'Spartan', sans-serif;
+    font-family: 'League Spartan', sans-serif;
 }
 
-h1 { font-size: 50px; line-height: 64px; color: #222; }
-h2 { font-size: 46px; line-height: 54px; color: #222; }
-h4 { font-size: 20px; color: #222; }
-h6 { font-weight: 700; font-size: 12px; }
-p { font-size: 16px; color: #465b52; margin: 15px 0 20px 0; }
+html {
+    scroll-behavior: smooth;
+}
 
-.section-p1 { padding: 40px 80px; }
+body {
+    width: 100%;
+    overflow-x: hidden; /* Prevents horizontal scrollbar */
+}
+
+/* Typography Scale */
+h1 { font-size: 56px; line-height: 64px; color: #222; margin-bottom: 10px; }
+h2 { font-size: 48px; line-height: 54px; color: #222; }
+h4 { font-size: 22px; color: #222; font-weight: 600; }
+h6 { font-weight: 700; font-size: 13px; }
+p { font-size: 16px; color: var(--text-muted); margin: 15px 0 20px 0; }
+
+.section-p1 { padding: 80px 80px; }
 .section-m1 { margin: 40px 0; }
 
-body { width: 100%; }
+/* --- 2. Button Designs --- */
+button {
+    font-size: 14px;
+    font-weight: 600;
+    padding: 15px 30px;
+    border-radius: 4px;
+    cursor: pointer;
+    border: none;
+    outline: none;
+    transition: all 0.3s ease;
+}
 
-/* --- Header --- */
+.btn-primary {
+    background: var(--primary);
+    color: var(--white);
+    background-image: url("button.png"); /* Optional texture */
+}
+
+.btn-primary:hover {
+    background: var(--primary-dark);
+    transform: translateY(-3px);
+    box-shadow: 0 5px 15px rgba(8, 129, 120, 0.4);
+}
+
+.btn-white {
+    background-color: var(--white);
+    color: #000;
+}
+.btn-white:hover {
+    background: var(--primary);
+    color: var(--white);
+}
+
+/* --- 3. Header & Glassmorphism --- */
 #header {
     display: flex;
     align-items: center;
     justify-content: space-between;
     padding: 20px 80px;
-    background: var(--bg-color);
+    background: rgba(227, 230, 243, 0.9); /* Transparent */
     box-shadow: 0 5px 15px rgba(0, 0, 0, 0.06);
     z-index: 999;
     position: sticky;
     top: 0;
     left: 0;
+    backdrop-filter: blur(10px); /* The "Frosted Glass" effect */
+    transition: 0.3s ease;
+}
+
+#header.sticky {
+    padding: 10px 80px;
+    box-shadow: 0 10px 20px rgba(0,0,0,0.1);
 }
 
 #navbar {
@@ -64,7 +117,7 @@ body { width: 100%; }
 
 #navbar li a:hover,
 #navbar li a.active {
-    color: var(--primary-color);
+    color: var(--primary);
 }
 
 #navbar li a.active::after,
@@ -72,7 +125,7 @@ body { width: 100%; }
     content: "";
     width: 30%;
     height: 2px;
-    background: var(--primary-color);
+    background: var(--primary);
     position: absolute;
     bottom: -4px;
     left: 20px;
@@ -81,10 +134,10 @@ body { width: 100%; }
 #mobile { display: none; align-items: center; }
 #close { display: none; }
 
-/* --- Hero Section --- */
+/* --- 4. Hero Section --- */
 #hero {
     background-image: url("hero4.png");
-    height: 90vh;
+    height: 100vh; /* Full screen height */
     width: 100%;
     background-size: cover;
     background-position: top 25% right 0;
@@ -95,22 +148,10 @@ body { width: 100%; }
     justify-content: center;
 }
 
-#hero h4 { padding-bottom: 15px; }
-#hero h1 { color: var(--primary-color); }
+#hero h4 { padding-bottom: 15px; letter-spacing: 1px; }
+#hero h1 { color: var(--primary); }
 
-#hero button {
-    background-image: url("button.png"); /* Ensure this image exists, or use simple CSS below */
-    background-color: transparent;
-    color: var(--primary-color);
-    border: 0;
-    padding: 14px 80px 14px 65px;
-    background-repeat: no-repeat;
-    cursor: pointer;
-    font-weight: 700;
-    font-size: 15px;
-}
-
-/* --- Features Section --- */
+/* --- 5. Features Section --- */
 #feature {
     display: flex;
     align-items: center;
@@ -122,16 +163,17 @@ body { width: 100%; }
     width: 180px;
     text-align: center;
     padding: 25px 15px;
-    box-shadow: 20px 20px 34px rgba(0, 0, 0, 0.03);
-    border: var(--border);
-    border-radius: 4px;
+    box-shadow: var(--shadow-sm);
+    border: 1px solid rgba(0,0,0,0.05); /* Softer border */
+    border-radius: 8px;
     margin: 15px 0;
-    transition: transform 0.3s ease;
+    background: #fff;
+    transition: 0.3s ease;
 }
 
 #feature .fe-box:hover {
-    box-shadow: 10px 10px 54px rgba(70, 62, 221, 0.1);
-    transform: translateY(-5px); /* Professional hover effect */
+    box-shadow: var(--shadow-hover);
+    transform: translateY(-10px); /* Significant lift */
 }
 
 #feature .fe-box img { width: 100%; margin-bottom: 10px; }
@@ -141,18 +183,18 @@ body { width: 100%; }
     padding: 9px 8px 6px 8px;
     line-height: 1;
     border-radius: 4px;
-    color: var(--primary-color);
+    color: var(--primary);
     background-color: #fddde4;
 }
 
-/* Feature Box Unique Colors */
+/* Feature Colors */
 #feature .fe-box:nth-child(2) h6 { background-color: #cdebbc; }
 #feature .fe-box:nth-child(3) h6 { background-color: #d1e8f2; }
 #feature .fe-box:nth-child(4) h6 { background-color: #cdd4f8; }
 #feature .fe-box:nth-child(5) h6 { background-color: #f6dbf6; }
 #feature .fe-box:nth-child(6) h6 { background-color: #fff2e5; }
 
-/* --- Products Section --- */
+/* --- 6. Product Cards --- */
 #product1 { text-align: center; }
 
 #product1 .pro-container {
@@ -165,44 +207,64 @@ body { width: 100%; }
 #product1 .pro {
     width: 23%;
     min-width: 250px;
-    padding: 10px 12px;
-    border: var(--border);
-    border-radius: 25px;
+    padding: 15px;
+    border: 1px solid #f0f0f0;
+    border-radius: 20px;
     cursor: pointer;
-    box-shadow: var(--shadow);
+    box-shadow: var(--shadow-sm);
     margin: 15px 0;
-    transition: 0.2s ease;
+    transition: 0.3s ease;
     position: relative;
+    background: #fff;
+    overflow: hidden; /* Keeps images inside radius */
 }
 
-#product1 .pro:hover { box-shadow: 20px 20px 30px rgba(0, 0, 0, 0.06); }
-#product1 .pro img { width: 100%; border-radius: 20px; }
+#product1 .pro:hover {
+    box-shadow: var(--shadow-hover);
+    transform: scale(1.02); /* Subtle zoom */
+}
+
+#product1 .pro img {
+    width: 100%;
+    border-radius: 15px;
+    transition: 0.3s ease;
+}
+
+/* Image zoom inside card on hover */
+#product1 .pro:hover img {
+    transform: scale(1.03); 
+}
+
 #product1 .pro .des { text-align: start; padding: 10px 0; }
 #product1 .pro .des span { color: #606063; font-size: 12px; }
-#product1 .pro .des h5 { padding-top: 7px; color: #1a1a1a; font-size: 14px; }
+#product1 .pro .des h5 { padding-top: 7px; color: #1a1a1a; font-size: 14px; font-weight: 600; }
 #product1 .pro .des i { font-size: 12px; color: rgb(243, 181, 25); }
-#product1 .pro .des h4 { padding-top: 7px; font-size: 15px; font-weight: 700; color: var(--primary-color); }
+#product1 .pro .des h4 { padding-top: 7px; font-size: 15px; font-weight: 700; color: var(--primary); }
 
 #product1 .pro .cart {
     width: 40px;
     height: 40px;
     line-height: 40px;
-    border-radius: 50px;
+    border-radius: 50%;
     background-color: #e8f6ea;
     font-weight: 500;
-    color: var(--primary-color);
+    color: var(--primary);
     border: 1px solid #cce7d0;
     position: absolute;
     bottom: 20px;
-    right: 10px;
+    right: 15px;
     display: flex;
     align-items: center;
     justify-content: center;
-    transition: all 0.3s ease;
+    transition: 0.3s ease;
 }
-#product1 .pro .cart:hover { background: var(--primary-color); color: #fff; }
+#product1 .pro .cart:hover {
+    background: var(--primary);
+    color: #fff;
+    transform: rotate(360deg); /* Playful interaction */
+}
 
-/* --- Banner Section --- */
+/* --- 7. Banner (Parallax) --- */
 #banner {
     display: flex;
     flex-direction: column;
@@ -211,30 +273,17 @@ body { width: 100%; }
     text-align: center;
     background-image: url("banner/b2.jpg");
     width: 100%;
-    height: 40vh;
+    height: 45vh;
     background-size: cover;
     background-position: center;
+    background-attachment: fixed; /* Parallax Effect */
 }
 
-#banner h4 { color: #fff; font-size: 16px; }
-#banner h2 { color: #fff; font-size: 30px; padding: 10px 0; }
+#banner h4 { color: #fff; font-size: 18px; }
+#banner h2 { color: #fff; font-size: 34px; padding: 10px 0; text-shadow: 1px 1px 2px rgba(0,0,0,0.3); }
 #banner h2 span { color: #ef3636; }
 
-button.normal {
-    font-size: 14px;
-    font-weight: 600;
-    padding: 15px 30px;
-    color: #000;
-    background-color: #fff;
-    border-radius: 4px;
-    cursor: pointer;
-    border: none;
-    outline: none;
-    transition: 0.2s;
-}
-button.normal:hover { background: var(--primary-color); color: #fff; }
-
-/* --- Newsletter Section --- */
+/* --- 8. Newsletter --- */
 #newsletter {
     display: flex;
     justify-content: space-between;
@@ -257,21 +306,22 @@ button.normal:hover { background: var(--primary-color); color: #fff; }
     font-size: 14px;
     width: 100%;
     border: 1px solid transparent;
-    border-radius: 4px 0 0 4px; /* Connected input and button */
+    border-radius: 4px 0 0 4px;
     outline: none;
 }
 #newsletter button {
-    background-color: var(--primary-color);
+    background-color: var(--primary);
     color: #fff;
     white-space: nowrap;
     border-radius: 0 4px 4px 0;
 }
 
-/* --- Footer --- */
+/* --- 9. Footer --- */
 footer {
     display: flex;
     flex-wrap: wrap;
     justify-content: space-between;
+    background: #fff; /* Clean look */
 }
 
 footer .col {
@@ -285,7 +335,7 @@ footer .logo { margin-bottom: 30px; }
 footer h4 { font-size: 14px; padding-bottom: 20px; }
 footer p { font-size: 13px; margin: 0 0 8px 0; }
 footer a { font-size: 13px; text-decoration: none; color: #222; margin-bottom: 10px; transition: 0.2s; }
-footer a:hover { color: var(--primary-color); padding-left: 5px; } /* Little slide effect */
+footer a:hover { color: var(--primary); padding-left: 5px; } 
 
 footer .follow { margin-top: 20px; }
 footer .follow i {
@@ -294,13 +344,25 @@ footer .follow i {
     cursor: pointer;
     transition: 0.2s;
 }
-footer .follow i:hover { color: var(--primary-color); }
+footer .follow i:hover { color: var(--primary); transform: translateY(-3px); }
 
 footer .install .row img { border: 1px solid #088178; border-radius: 6px; margin: 10px 0 15px 0; }
 footer .install img { margin: 10px 0 15px 0; }
-footer .copyright { width: 100%; text-align: center; }
+footer .copyright { width: 100%; text-align: center; margin-top: 20px; font-size: 12px; }
 
-/* --- Responsive Media Queries --- */
+/* --- 10. Scroll Animation Classes (JS triggers these) --- */
+.hidden-element {
+    opacity: 0;
+    transform: translateY(30px); /* Start slightly down */
+    transition: all 0.8s ease;
+}
+
+.show {
+    opacity: 1;
+    transform: translateY(0); /* Animate to position */
+}
+
+/* --- 11. Responsive Media Queries --- */
 
 @media (max-width: 799px) {
     .section-p1 { padding: 40px 40px; }
@@ -319,6 +381,7 @@ footer .copyright { width: 100%; text-align: center; }
         box-shadow: 0 40px 60px rgba(0,0,0,0.1);
         padding: 80px 0 0 10px;
         transition: 0.3s;
+        z-index: 1000;
     }
 
     #navbar.active { right: 0; }
@@ -335,7 +398,7 @@ footer .copyright { width: 100%; text-align: center; }
     #feature .fe-box { margin: 15px 15px; }
     #product1 .pro-container { justify-content: center; }
     #product1 .pro { margin: 15px; }
-    #banner { height: 20vh; }
+    #banner { height: 25vh; }
     #newsletter .form { width: 70%; }
 }
 
@@ -343,12 +406,12 @@ footer .copyright { width: 100%; text-align: center; }
     .section-p1 { padding: 20px; }
     
     #header { padding: 10px 30px; }
-    h1 { font-size: 38px; }
+    h1 { font-size: 38px; line-height: 45px; }
     h2 { font-size: 32px; }
     
     #hero { padding: 0 20px; background-position: 55%; }
     #feature { justify-content: space-between; }
-    #feature .fe-box { width: 155px; margin: 0 0 15px 0; }
+    #feature .fe-box { width: 48%; margin: 0 0 15px 0; }
     
     #product1 .pro { width: 100%; }
     
